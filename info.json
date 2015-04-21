@@ -1,0 +1,30 @@
+{ 
+    "configuration": [
+        {   
+            "default": "",
+            "description": "To get a Wolfram Alpha API key, you need to register (freely) on https://developer.wolframalpha.com/portal/signin.html",
+            "key": "api_key",
+            "name" : "Wolfram alpha API key",
+            "required": true,
+            "type": "string"
+        }
+    ],
+    "products": [],
+    "commands": {},
+    "xpl_commands": {}, 
+    "sensors": {},
+    "xpl_stats": {},
+    "device_types": {},
+    "identity": {
+        "author": "Fritz", 
+        "author_email": "fritz.smh at gmail.com", 
+        "tags": ["butler"], 
+        "dependencies": [], 
+        "description": "Butler package to use Wolfram Alpha", 
+        "domogik_min_version": "0.4.0", 
+        "name": "wolfram", 
+        "type": "brain", 
+        "version": "1.0"
+    }, 
+    "json_version": 2
+}
