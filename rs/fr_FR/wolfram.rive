@@ -108,5 +108,8 @@
 < object
 
 
-+ (trouve moi|dis moi|donne moi|donne moi des infos sur|donne moi des informations sur) *
+// Le poids est mis à 1 car d'autres plugins pourraient utiliser le même type de phrases et être prioritaires du coup.
+// Wolfram ne doit être interrogé qu'en dernier recours par défaut
+// Rappel : Domogik change le poids par défaut dans rivescript qui est 1 à 10.
++ (trouve moi|dis moi|donne moi|donne moi des infos sur|donne moi des informations sur) *{weight=1}
 - <call>wolfram_alpha <star2></call>
