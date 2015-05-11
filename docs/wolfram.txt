@@ -1,0 +1,24 @@
+.. _index:
+
+=============
+Brain wolfram
+=============
+
+Purpose
+=======
+
+The *wolfram* brain is a gateway to query Wofram Alpha https://www.wolframalpha.com/ from Domogik.
+
+Dependencies
+============
+
+There is no dependency.
+
+Brain configuration
+===================
+
+You need to set a Wolfram Alpha Key. You can grab it by registering on the Wolfram Alpha website.
+
+Be careful, the key may take a few hours to be activated.
+
+
