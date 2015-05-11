@@ -21,4 +21,9 @@ You need to set a Wolfram Alpha Key. You can grab it by registering on the Wolfr
 
 Be careful, the key may take a few hours to be activated.
 
+===================== =========================== ======================================================================
+Key                   Type                        Description
+===================== =========================== ======================================================================
+api_key               string                      To get a Wolfram Alpha API key, you need to register (freely) on https://developer.wolframalpha.com/portal/signin.html
+===================== =========================== ======================================================================
 
