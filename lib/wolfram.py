@@ -103,7 +103,10 @@ class Wolfram():
                 print(u"Text = {0}".format(data['plaintext']))
     
                 pod_result = self.process_response(data['plaintext'])
-                response = u"{0}\n{1}. {2}".format(response, pod.title, pod_result)
+                if pod.title != "":
+                    response = u"{0}\n{1}. {2}".format(response, pod.title, pod_result)
+                else:
+                    response = u"{0}\n{2}".format(response, pod_result)
             return response
         except:
             print(u"Wolfram Error : {0}".format(traceback.format_exc()))
@@ -130,7 +133,8 @@ class Wolfram():
         for a_line in tmp_pod_data_lines:
             print(a_line)
             a_line = a_line.replace("|", ":")
-            pod_result = u"{0}{1}. ".format(pod_result, a_line)
+            if a_line != "":
+                pod_result = u"{0}{1}. ".format(pod_result, a_line)
         return pod_result
                      
     
