@@ -19,7 +19,12 @@
         "author": "Fritz", 
         "author_email": "fritz.smh at gmail.com", 
         "tags": ["butler"], 
-        "dependencies": [], 
+        "dependencies": [
+            {   
+                "id": "goslate (>=1.4.0)",
+                "type": "python"
+            }
+        ],
         "description": "Butler package to use Wolfram Alpha", 
         "domogik_min_version": "0.4.0", 
         "name": "wolfram", 
