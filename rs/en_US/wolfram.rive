@@ -1,0 +1,21 @@
+> object wolfram_alpha python
+    from domogik_packages.brain_wolfram.lib.wolfram import Wolfram
+    cfg_i18n = {
+                 'LANG' : "us",
+                 'ERROR_MSG' : u"I was not able to find a response. The error is ",
+                 'ERROR_MSG_NONE' : u"I was not able to find a response.",
+                 'ERROR_MSG_NOT_CONFIGURED' : u"The package brain wolfram must be configured.",
+                 'ERROR_MSG_CONFIG' : u"An error occured during the configuration reading."
+               }
+
+    w = Wolfram(cfg_i18n)
+    return w.query(args)
+< object
+
+
+// Le weight is set to 1 because some other brain parts could use the same kind of sentences and they would be more important. est mis à 1 car d'autres plugins pourraient utiliser le même type de phrases et être prioritaires du coup.
+// Wolfram must only be called in last
+// Reminder : Domogik change the default rivescript weight from 1 to 10
++ (trouve[-]moi|dis[-]moi|donne[-]moi|donne[-]moi des infos sur|donne[-]moi des informations sur) *{weight=1}
++ (give me some informations on|tell me about) *{weight=1}
+- <call>wolfram_alpha <star2></call>
