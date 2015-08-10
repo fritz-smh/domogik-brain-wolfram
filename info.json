@@ -29,8 +29,8 @@
                 "type": "python"
             }
         ],
-        "description": "Butler package to use Wolfram Alpha", 
-        "domogik_min_version": "0.4.0", 
+        "description": "Butler package to use Wolfram Alpha, an online knowledge database", 
+        "domogik_min_version": "0.4.1", 
         "name": "wolfram", 
         "type": "brain", 
         "version": "1.0"
