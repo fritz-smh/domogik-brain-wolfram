@@ -5,7 +5,7 @@ Changelog
 1.1
 ===
 
-* ...
+* Fix : comment useless debug print
 
 1.0
 ===
