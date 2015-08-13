@@ -12,7 +12,6 @@
 import traceback
 import goslate
 import tungsten
-import pprint
 
 
 # translation for non "us" languages as wolfram works only in english
@@ -87,7 +86,7 @@ class Wolfram():
             # if so, we only take this one in account
             for pod in result.pods:
                 if pod.id == "Result":
-                    print(pod.format)
+                    #print(pod.format)
                     return u"{0}".format(self.process_response(pod.format['plaintext']))
     
             # if no result, process returned data
@@ -99,8 +98,8 @@ class Wolfram():
                 # skip data with no plain text
                 if data['plaintext'] == [None]:
                     continue
-                print(u"Title = {0}".format(pod.title))
-                print(u"Text = {0}".format(data['plaintext']))
+                #print(u"Title = {0}".format(pod.title))
+                #print(u"Text = {0}".format(data['plaintext']))
     
                 pod_result = self.process_response(data['plaintext'])
                 if pod.title != "":
@@ -119,19 +118,19 @@ class Wolfram():
         # we can't do this as the list may contain some None... : tmp_pod_data = '\n'.join(tab_text)
         tmp_pod_data = u''
         for tmp in tab_text:
-            print(tmp)
+            #print(tmp)
             if tmp != None:
                 tmp_pod_data = u'{0}\n{1}'.format(tmp_pod_data, tmp)
-        print(tmp_pod_data)
+        #print(tmp_pod_data)
     
         # 2. we split by \n. 
         tmp_pod_data_lines = tmp_pod_data.split("\n")
-        print(tmp_pod_data_lines)
+        #print(tmp_pod_data_lines)
         
         # 3. for each line we spit by | (for tables)
         pod_result = u""
         for a_line in tmp_pod_data_lines:
-            print(a_line)
+            #print(a_line)
             a_line = a_line.replace("|", ":")
             if a_line != "":
                 pod_result = u"{0}{1}. ".format(pod_result, a_line)
