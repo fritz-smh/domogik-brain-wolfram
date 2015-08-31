@@ -13,6 +13,8 @@
 < object
 
 
+// ##feature## trouver des informations avec Wolfram Alpha
+
 // Le poids est mis à 1 car d'autres plugins pourraient utiliser le même type de phrases et être prioritaires du coup.
 // Wolfram ne doit être interrogé qu'en dernier recours par défaut
 // Rappel : Domogik change le poids par défaut dans rivescript qui est 1 à 10.

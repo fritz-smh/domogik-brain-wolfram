@@ -5,6 +5,7 @@ Changelog
 1.1
 ===
 
+* Add feature tag
 * Fix : comment useless debug print
 
 1.0

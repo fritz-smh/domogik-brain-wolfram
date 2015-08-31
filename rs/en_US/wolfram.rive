@@ -13,7 +13,9 @@
 < object
 
 
-// Le weight is set to 1 because some other brain parts could use the same kind of sentences and they would be more important. est mis à 1 car d'autres plugins pourraient utiliser le même type de phrases et être prioritaires du coup.
+// ##feature## find informations thanks to Wolfram Alpha
+
+// The weight is set to 1 because some other brain parts could use the same kind of sentences and they would be more important. 
 // Wolfram must only be called in last
 // Reminder : Domogik change the default rivescript weight from 1 to 10
 + (give me some informations on|tell me about) *{weight=1}
