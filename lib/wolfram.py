@@ -43,9 +43,13 @@ class Wolfram():
         except:
             return self.cfg_i18n['ERROR_MSG_CONFIG']
         query = ' '.join(args)
+        print("Wolfram : query not translated = {0}".format(query))
         query_us = self.translate_query(query)
+        print("Wolfram : query translated = {0}".format(query_us))
         response = self.ask_wolfram(query_us)
+        print("Wolfram : response not translated = {0}".format(response))
         response_lang = self.translate_response(response)
+        print("Wolfram : response translated = {0}".format(response_lang))
         return response_lang
 
     def translate_query(self, text):
