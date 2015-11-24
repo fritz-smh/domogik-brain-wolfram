@@ -10,14 +10,23 @@
 
 # imports
 import traceback
+# translatros
 import goslate
+from textblob import TextBlob
+# wolfram
 import tungsten
+
+WOLFRAM_LANG="en"
+
+# choose the translator
+TRANSLATOR = "textblob"
+#TRANSLATOR = "goslate"
 
 
 # translation for non "us" languages as wolfram works only in english
 class Wolfram():
 
-    def __init__(self, cfg_i18n):
+    def __init__(self, cfg_i18n, log = None):
         """ constructor
             @param cfg_i18n : a dictionnary of i18n data
             { 'LANG' : ...,
@@ -27,6 +36,7 @@ class Wolfram():
               'ERROR_MSG_CONFIG' : ... }
         """
         self.cfg_i18n = cfg_i18n
+        self.log = log
 
     def query(self, args):
         """ Do the query
@@ -53,34 +63,58 @@ class Wolfram():
         return response_lang
 
     def translate_query(self, text):
-        #print("Translate query : {0}".format(text))
-        if self.cfg_i18n['LANG'] == "us":
+        self.log.info(u"Translate query : '{0}' from lang {1} in lang : {2}".format(text, self.cfg_i18n['LANG'], WOLFRAM_LANG))
+        self.log.info(u"Translator engine is : {0}".format(TRANSLATOR))
+
+        if self.cfg_i18n['LANG'] == WOLFRAM_LANG:
             return text
     
         # translation in "us"
-        gs = goslate.Goslate()
-        translated = gs.translate(text, "us", self.cfg_i18n['LANG'])
-        return translated
+        if TRANSLATOR == "goslate":
+            gs = goslate.Goslate()
+            #gs = goslate.Goslate(service_urls = ['http://translate.google.de'])
+            #translated = gs.translate("bonjour", "en", "fr")
+            #translated = gs.translate("bonjour", WOLFRAM_LANG, self.cfg_i18n['LANG'])
+            translated = gs.translate(text, WOLFRAM_LANG, self.cfg_i18n['LANG'])
+        elif TRANSLATOR == "textblob":
+            q_blob = TextBlob(u"{0}".format(text))
+            translated = q_blob.translate(from_lang = self.cfg_i18n['LANG'], to = WOLFRAM_LANG)
+        else:
+            self.log.warning(u"No translation engine used!")
+            translated = text
+        self.log.info(u"Translated : {0}".format(translated))
+        return u"{0}".format(translated)
     
     def translate_response(self, text):
-        #print("Translate response : {0}".format(text))
-        if self.cfg_i18n['LANG'] == "us":
+        self.log.info(u"Translate response : '{0}' from lang {1} in lang : {2}".format(text, WOLFRAM_LANG, self.cfg_i18n['LANG']))
+        self.log.info(u"Translator engine is : {0}".format(TRANSLATOR))
+
+        if self.cfg_i18n['LANG'] == WOLFRAM_LANG:
             return text
     
         # translation in LANG
-        gs = goslate.Goslate()
-        translated = gs.translate(text, self.cfg_i18n['LANG'])
-        return translated
+        if TRANSLATOR == "goslate":
+            gs = goslate.Goslate()
+            translated = gs.translate(text, self.cfg_i18n['LANG'], WOLFRAM_LANG)
+        elif TRANSLATOR == "textblob":
+            q_blob = TextBlob(u"{0}".format(text))
+            translated = q_blob.translate(from_lang = WOLFRAM_LANG, to = self.cfg_i18n['LANG'])
+        else:
+            self.log.warning(u"No translation engine used!")
+            translated = text
+        self.log.info(u"Translated : {0}".format(translated))
+        return u"{0}".format(translated)
     
     # request wolfram for an answer
     def ask_wolfram(self, text):
         try:
             response = u""
-            #print("Call Wolfram for : {0}".format(text))
+            self.log.info(u"Call Wolfram for : {0}".format(text))
             client = tungsten.Tungsten(self.WOLFRAMALPHA_APPID)
             result = client.query(text)
             if result.success == False:
-                #print(result.error)
+                self.log.error(u"Wolfram error : {0}".format(result.error))
+                self.log.error(u"Result is : {0}".format(result))
                 if result.error == None:
                     return u"{0}".format(self.cfg_i18n['ERROR_MSG_NONE'])
                 else:
@@ -90,7 +124,7 @@ class Wolfram():
             # if so, we only take this one in account
             for pod in result.pods:
                 if pod.id == "Result":
-                    #print(pod.format)
+                    self.log.info(u"Wolfram response : {0}".format(pod.format['plaintext']))
                     return u"{0}".format(self.process_response(pod.format['plaintext']))
     
             # if no result, process returned data
@@ -110,9 +144,10 @@ class Wolfram():
                     response = u"{0}\n{1}. {2}".format(response, pod.title, pod_result)
                 else:
                     response = u"{0}\n{2}".format(response, pod_result)
+            self.log.info(u"Wolfram response : {0}".format(response))
             return response
         except:
-            print(u"Wolfram Error : {0}".format(traceback.format_exc()))
+            self.log.error(u"Wolfram Error : {0}".format(traceback.format_exc()))
             return u"{0} : {1}".format(self.cfg_i18n['ERROR_MSG'], traceback.format_exc())
     
     def process_response(self, tab_text):

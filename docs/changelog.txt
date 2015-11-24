@@ -2,6 +2,12 @@
 Changelog
 =========
 
+1.2
+===
+
+* Domogik 0.5 compatibility : handle butler logger
+* New translator : textblob
+
 1.1
 ===
 
