@@ -14,12 +14,12 @@ Dependencies
 
 The following dependencies are needed : 
 
-* goslate (>=1.4.0)  : this is needed to translate the queries and the answers.
+* textblob (>=0.11.0)  : this is needed to translate the queries and the answers.
 * Tungsten (==0.1.1) : this is needed to interact with Wolfram Alpha.
 
 To install them, just do : ::
 
-    pip install goslate
+    pip install textblob
     pip install tungsten
 
 

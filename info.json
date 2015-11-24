@@ -21,7 +21,7 @@
         "tags": ["butler"], 
         "dependencies": [
             {   
-                "id": "goslate (>=1.4.0)",
+                "id": "textblob (>=0.11.0)",
                 "type": "python"
             },
             {   
